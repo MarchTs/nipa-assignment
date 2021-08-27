@@ -1,0 +1,27 @@
+datasource db {
+  url      = env("DATABASE_URL")
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Ticket {
+  id          String       @unique
+  title       String
+  description String
+  contact     String
+  status      TicketStatus
+  updated     DateTime     @default(now()) @db.Timestamptz
+  created     DateTime     @default(now()) @db.Timestamptz
+  isDelete    Boolean
+
+}
+
+enum TicketStatus {
+  pending
+  accepted
+  resolved
+  rejected
+}
