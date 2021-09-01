@@ -18,6 +18,10 @@ class TicketService {
             orderBy: [{ status: 'desc' }, { updated: 'desc' }],
         });
     }
+
+    find(id: string): Promise<Ticket | null> {
+        return prisma.ticket.findFirst({ where: { id: id } });
+    }
 }
 
 export = new TicketService();

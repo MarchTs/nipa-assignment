@@ -30,6 +30,10 @@ class TicketFacade {
     list(status?: TicketStatus): Promise<Ticket[]> {
         return TicketService.list(status);
     }
+
+    find(id: string): Promise<Ticket | null> {
+        return TicketService.find(id);
+    }
 }
 
 export = new TicketFacade();

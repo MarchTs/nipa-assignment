@@ -8,7 +8,7 @@ router.post('/', async (req: Request, res: Response) => {
     res.json(await TicketFacade.create(req.body));
 });
 
-router.post('/:id', async (req: Request, res: Response) => {
+router.put('/:id', async (req: Request, res: Response) => {
     res.json(await TicketFacade.update(req.params.id, req.body));
 });
 
@@ -19,6 +19,13 @@ router.get('/', async (req: Request, res: Response) => {
         ? tricketStatusOption(raw_status)
         : undefined;
     res.json(await TicketFacade.list(status));
+});
+
+router.get('/:id', async (req: Request, res: Response) => {
+    const id = req.params.id;
+    const result = await TicketFacade.find(id);
+    if (result) res.json(result);
+    else res.status(404).json({ message: `id ${id} not found` });
 });
 
 export = router;
